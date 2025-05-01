@@ -1,0 +1,311 @@
+:root {
+    --crimson: #ff1a1a;
+    --dark-red: #660000;
+    --neon-orange: #ff6600;
+    --smoke: rgba(30, 30, 30, 0.6);
+    --black: #0a0a0a;
+    --neon-glow: #ff3333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, var(--black), var(--smoke));
+    color: var(--crimson);
+    font-family: 'Bebas Neue', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, var(--neon-orange), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    transition: transform 0.1s ease;
+    /* box-shadow: 0 0 15px var(--neon-orange); */
+}
+
+/* Overlay for initial load */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1.5s ease;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Play Button */
+.play-button {
+    padding: 25px 50px;
+    font-size: 1.8rem;
+    color: var(--black);
+    background: var(--crimson);
+    border: 3px solid var(--neon-orange);
+    border-radius: 20px;
+    box-shadow: 0 0 30px var(--neon-orange), 0 0 60px var(--dark-red);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Anton', sans-serif;
+    transition: all 0.4s ease;
+    animation: pulse 1.5s infinite;
+}
+
+.play-button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 50px var(--neon-orange), 0 0 100px var(--dark-red);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    z-index: 900;
+}
+
+.nav-brand {
+    font-size: 2rem;
+    color: var(--neon-orange);
+    text-shadow: 0 0 20px var(--neon-glow);
+    font-family: 'Anton', sans-serif;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--crimson);
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    text-shadow: 0 0 50px var(--neon-orange), 0 0 100px var(--dark-red);
+}
+
+.nav-links a:hover {
+    color: var(--neon-orange);
+    text-shadow: 0 0 15px var(--neon-glow);
+}
+
+/* Fire Animations */
+.fire-left, .fire-right {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+.fire-left {
+    left: 0;
+    background: url('fire.gif') repeat-y left center;
+    background-size: cover;
+    animation: flicker 1s infinite ease-in-out;
+}
+
+.fire-right {
+    right: 0;
+    background: url('fire.gif') repeat-y right center;
+    background-size: cover;
+    animation: flicker 1.1s infinite ease-in-out;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+/* Particle Canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0.3;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 150px 20px;
+    min-height: 100vh;
+    position: relative;
+    z-index: 20;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.neon-text {
+    font-size: 6rem;
+    text-transform: uppercase;
+    color: var(--crimson);
+    text-shadow: 0 0 60px var(--black), 0 0 30px var(--dark-red);
+    animation: neon-flicker 3s infinite;
+}
+
+@keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+}
+
+.description {
+    font-size: 2rem;
+    color: #ff9999;
+    font-family: 'Anton', sans-serif;
+    text-shadow: 0 0 15px var(--neon-orange), 0 0 30px var(--black);
+    margin-bottom: 50px;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.description.visible {
+    opacity: 1;
+}
+
+.hero-image {
+    width: 700px;
+    max-width: 90%;
+    border: 15px solid var(--dark-red);
+    border-radius: 30px;
+    /* box-shadow: 0 0 0px var(--neon-orange), 0 0 50px var(--dark-red); */
+    transition: transform 0.5s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Other Sections */
+.section {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.section h2 {
+    font-size: 3rem;
+    color: var(--neon-orange);
+    text-shadow: 0 0 20px var(--neon-glow);
+    margin-bottom: 20px;
+}
+
+.section p {
+    font-size: 1.5rem;
+    color: #ffcccc;
+    text-shadow: 0 0 10px var(--dark-red);
+}
+
+/* Marquee with Glitch Effect */
+.marquee {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--dark-red);
+    color: var(--neon-orange);
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    overflow: hidden;
+    z-index: 30;
+}
+
+.marquee span {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 12s linear infinite, glitch 2s infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes glitch {
+    0% { transform: skew(0deg); }
+    10% { transform: skew(2deg); }
+    20% { transform: skew(-2deg); }
+    30% { transform: skew(0deg); }
+    100% { transform: skew(0deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .neon-text {
+        font-size: 3.5rem;
+    }
+
+    .description {
+        font-size: 1.4rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .fire-left, .fire-right {
+        width: 80px;
+    }
+
+    .play-button {
+        font-size: 1.4rem;
+        padding: 15px 35px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+}
